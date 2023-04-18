@@ -21,6 +21,12 @@
 */
 
 class phpMorphy_Fsa_Sparse_File extends phpMorphy_Fsa_FsaAbstract {
+    /**
+     * @param int $trans
+     * @param string $word
+     * @param bool $readAnnot
+     * @return array
+     */
     function walk($trans, $word, $readAnnot = true) {
         $__fh = $this->resource; $fsa_start = $this->fsa_start;
 
@@ -75,6 +81,13 @@ class phpMorphy_Fsa_Sparse_File extends phpMorphy_Fsa_FsaAbstract {
         );
     }
 
+    /**
+     * @param int $startNode
+     * @param mixed $callback
+     * @param bool $readAnnot
+     * @param string $path
+     * @return int
+     */
     function collect($startNode, $callback, $readAnnot = true, $path = '') {
         $total = 0;
 
@@ -123,6 +136,10 @@ class phpMorphy_Fsa_Sparse_File extends phpMorphy_Fsa_FsaAbstract {
         return $total;
     }
 
+    /**
+     * @param int $index
+     * @return array
+     */
     function readState($index) {
         $__fh = $this->resource; $fsa_start = $this->fsa_start;
 
@@ -153,6 +170,10 @@ class phpMorphy_Fsa_Sparse_File extends phpMorphy_Fsa_FsaAbstract {
         return $result;
     }
 
+    /**
+     * @param string|string[] $rawTranses
+     * @return array
+     */
     function unpackTranses($rawTranses) {
         settype($rawTranses, 'array');
         $result = array();
@@ -169,6 +190,9 @@ class phpMorphy_Fsa_Sparse_File extends phpMorphy_Fsa_FsaAbstract {
         return $result;
     }
 
+    /**
+     * @return int|mixed
+     */
     protected function readRootTrans() {
         $__fh = $this->resource; $fsa_start = $this->fsa_start;
 
@@ -177,13 +201,20 @@ class phpMorphy_Fsa_Sparse_File extends phpMorphy_Fsa_FsaAbstract {
         return $trans;
     }
 
+    /**
+     * @return false|string
+     */
     protected function readAlphabet() {
         $__fh = $this->resource; $fsa_start = $this->fsa_start;
 
         fseek($__fh, $this->header['alphabet_offset']);        return fread($__fh, $this->header['alphabet_size']);
     }
 
-    function getAnnot($trans) {
+    /**
+     * @param array $trans
+     * @return false|string|null
+     */
+    public function getAnnot($trans) {
         if(!($trans & 0x0100)) {
             return null;
         }
@@ -205,11 +236,16 @@ class phpMorphy_Fsa_Sparse_File extends phpMorphy_Fsa_FsaAbstract {
         return $annot;
     }
 
-	function getAlphabetNum() {
+    /**
+     * @return array
+     */
+	public function getAlphabetNum() {
 		if(!isset($this->alphabet_num)) {
 			$this->alphabet_num = array_map('ord', $this->getAlphabet());
 		}
 
 		return $this->alphabet_num;
 	}
-	protected $alphabet_num;}
+
+	protected $alphabet_num;
+}

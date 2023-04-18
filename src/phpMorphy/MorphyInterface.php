@@ -89,8 +89,9 @@ interface phpMorphy_MorphyInterface {
     function isLastPredicted();
 
     /**
-    * @return one of PREDICT_BY_NONE, PREDICT_BY_SUFFIX, PREDICT_BY_DB
-    */
+     * Returns one of PREDICT_BY_NONE, PREDICT_BY_SUFFIX, PREDICT_BY_DB
+     * @return string
+     */
     function getLastPredictionType();
 
     /**

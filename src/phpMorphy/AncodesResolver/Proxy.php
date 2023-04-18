@@ -38,6 +38,9 @@ class phpMorphy_AncodesResolver_Proxy extends phpMorphy_AncodesResolver_Decorato
         $this->actAsProxy();
     }
 
+    /**
+     * @return object|phpMorphy_AncodesResolver_AncodesResolverInterface
+     */
     protected function proxyInstantiate() {
         $result = $this->instantiateClass($this->class, $this->args);
         unset($this->args);

@@ -21,11 +21,17 @@
 */
 
 class phpMorphy_AnnotDecoder_Common extends phpMorphy_AnnotDecoder_AnnotDecoderAbstract {
+    /**
+     * @return string
+     */
     protected function getUnpackString() {
         return 'Voffset/vcplen/vplen/vflen/vcommon_ancode/vforms_count/vpacked_forms_count/vaffixes_size/vform_no/vpos_id';
 //      return 'Voffset/vcplen/vplen/vflen/vcommon_ancode/vforms_count/vpacked_forms_count/vaffixes_size/vpos_id';
     }
 
+    /**
+     * @return int
+     */
     protected function getUnpackBlockSize() {
         return 22;
     }

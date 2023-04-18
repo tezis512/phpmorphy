@@ -38,6 +38,10 @@ class phpMorphy_Finder_Fsa_Finder extends phpMorphy_Finder_FinderAbstract {
         return $this->fsa;
     }
 
+    /**
+     * @param string $word
+     * @return array|false
+     */
     protected function doFindWord($word) {
         $result = $this->fsa->walk($this->root, $word);
 

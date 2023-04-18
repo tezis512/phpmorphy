@@ -32,6 +32,10 @@ class phpMorphy_GramInfo_Proxy extends phpMorphy_GramInfo_Decorator {
         $this->actAsProxy();
     }
 
+    /**
+     * @return object|phpMorphy_GramInfo_GramInfoInterface|phpMorphy_GramInfo_Proxy
+     * @throws phpMorphy_Exception
+     */
     protected function proxyInstantiate() {
         $result = phpMorphy_GramInfo_GramInfoAbstract::create($this->storage, false);
         unset($this->storage);

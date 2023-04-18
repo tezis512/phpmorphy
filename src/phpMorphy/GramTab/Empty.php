@@ -28,5 +28,11 @@ class phpMorphy_GramTab_Empty implements phpMorphy_GramTab_GramTabInterface {
     function includeConsts() { }
     function ancodeToString($ancodeId, $commonAncode = null) { return ''; }
     function stringToAncode($string) { return null; }
+
+    /**
+     * @param int|string $partOfSpeechId
+     * @param int[]|string[] $grammemIds
+     * @return string
+     */
     function toString($partOfSpeechId, $grammemIds) { return ''; }
 }

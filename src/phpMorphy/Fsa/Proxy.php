@@ -32,10 +32,14 @@ class phpMorphy_Fsa_Proxy extends phpMorphy_Fsa_Decorator {
         $this->actAsProxy();
     }
 
+    /**
+     * @return object|phpMorphy_Fsa_FsaInterface|phpMorphy_Fsa_Proxy
+     * @throws phpMorphy_Exception
+     */
     protected function proxyInstantiate() {
         $result = phpMorphy_Fsa_FsaAbstract::create($this->storage, false);
         unset($this->storage);
-        
+
         return $result;
     }
 }

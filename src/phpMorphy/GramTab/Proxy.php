@@ -32,10 +32,13 @@ class phpMorphy_GramTab_Proxy extends phpMorphy_GramTab_Decorator {
         $this->actAsProxy();
     }
 
+    /**
+     * @return object|phpMorphy_GramTab_GramTab
+     */
     protected function proxyInstantiate() {
         $result = phpMorphy_GramTab_GramTab::create($this->storage);
         unset($this->storage);
-        
+
         return $result;
     }
 }

@@ -48,6 +48,10 @@ class phpMorphy_Storage_Proxy extends phpMorphy_Storage_Decorator {
         );
     }
 
+    /**
+     * @return object|phpMorphy_Storage_File|phpMorphy_Storage_Mem|phpMorphy_Storage_Proxy|phpMorphy_Storage_Shm
+     * @throws phpMorphy_Exception
+     */
     protected function proxyInstantiate() {
         $result = $this->factory->create($this->type, $this->file_name, false);
 
@@ -56,5 +60,5 @@ class phpMorphy_Storage_Proxy extends phpMorphy_Storage_Decorator {
         unset($this->factory);
 
         return $result;
-    } 
+    }
 }

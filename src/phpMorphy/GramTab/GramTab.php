@@ -179,6 +179,11 @@ class phpMorphy_GramTab_GramTab implements phpMorphy_GramTab_GramTabInterface {
         return $this->__ancodes_map[$string];
     }
 
+    /**
+     * @param int|string $partOfSpeechId
+     * @param int[]|string[] $grammemIds
+     * @return string
+     */
     function toString($partOfSpeechId, $grammemIds) {
         return $partOfSpeechId . ' ' . implode(',', $grammemIds);
     }

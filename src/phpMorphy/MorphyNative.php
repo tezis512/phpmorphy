@@ -26,7 +26,7 @@ class phpMorphy_MorphyNative implements phpMorphy_MorphyInterface {
     const STORAGE_FILE = phpMorphy_Storage_Factory::STORAGE_FILE;
     const STORAGE_MEM = phpMorphy_Storage_Factory::STORAGE_MEM;
     const STORAGE_SHM = phpMorphy_Storage_Factory::STORAGE_SHM;
-    
+
     protected
         $storage_factory,
         $common_fsa,
@@ -35,11 +35,11 @@ class phpMorphy_MorphyNative implements phpMorphy_MorphyInterface {
         $options,
 
         // variables with two underscores uses lazy paradigm, i.e. initialized at first time access
-        //$__common_morphier,
-        //$__predict_by_suf_morphier,
-        //$__predict_by_db_morphier,
-        //$__bulk_morphier,
-        //$__paradigm_serializer,
+        $__common_morphier,
+        $__predict_by_suf_morphier,
+        $__predict_by_db_morphier,
+        $__bulk_morphier,
+        $__paradigm_serializer,
 
         $helper,
         $last_prediction_type
@@ -56,12 +56,20 @@ class phpMorphy_MorphyNative implements phpMorphy_MorphyInterface {
         }
 
         $this->last_prediction_type = self::PREDICT_BY_NONE;
+
+//        $this->init('__predict_by_db_morphier');
+//        $this->init('__predict_by_suf_morphier');
+//        $this->init('__bulk_morphier');
+        $this->init('__common_morphier');
+//        $this->init('__paradigm_serializer');
+//        $this->init('__grammems_provider');
     }
 
     /**
     * @return phpMorphy_Morphier_Interface
     */
-    function getCommonMorphier() {
+    function getCommonMorphier()
+    {
         return $this->__common_morphier;
     }
 
@@ -177,6 +185,9 @@ class phpMorphy_MorphyNative implements phpMorphy_MorphyInterface {
         return self::PREDICT_BY_NONE !== $this->last_prediction_type;
     }
 
+    /**
+     * @return string
+     */
     function getLastPredictionType() {
         return $this->last_prediction_type;
     }
@@ -546,7 +557,7 @@ class phpMorphy_MorphyNative implements phpMorphy_MorphyInterface {
 
     protected function createCommonSource(phpMorphy_FilesBundle $bundle, $opts) {
         $type = $opts['type'];
-        
+
         switch($type) {
             case phpMorphy_Source_SourceFactory::SOURCE_FSA:
                 return new phpMorphy_Source_Fsa($this->common_fsa);
@@ -618,7 +629,13 @@ class phpMorphy_MorphyNative implements phpMorphy_MorphyInterface {
         return (array)$options + $defaults;
     }
 
-    function __get($name) {
+    /**
+     * @param $name
+     * @return mixed
+     * @throws phpMorphy_Exception
+     */
+    protected function init($name)
+    {
         switch($name) {
             case '__predict_by_db_morphier':
                 $this->__predict_by_db_morphier = $this->createPredictByDbMorphier(
