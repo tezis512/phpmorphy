@@ -20,7 +20,8 @@
 * Boston, MA 02111-1307, USA.
 */
 
-class phpMorphy_Finder_Fsa_PredictBySuffix extends phpMorphy_Finder_Fsa_Finder {
+class phpMorphy_Finder_Fsa_PredictBySuffix extends phpMorphy_Finder_Fsa_Finder
+{
     protected
         $min_suf_len,
         $unicode;
@@ -32,6 +33,10 @@ class phpMorphy_Finder_Fsa_PredictBySuffix extends phpMorphy_Finder_Fsa_Finder {
         $this->unicode = phpMorphy_UnicodeHelper_UnicodeHelperAbstract::getHelperForEncoding($encoding);
     }
 
+    /**
+     * @param string $word
+     * @return array|false
+     */
     protected function doFindWord($word) {
         $word_len = $this->unicode->strlen($word);
 
@@ -62,6 +67,11 @@ class phpMorphy_Finder_Fsa_PredictBySuffix extends phpMorphy_Finder_Fsa_Finder {
         }
     }
 
+    /**
+     * @param $annots
+     * @param $len
+     * @return mixed
+     */
     protected function fixAnnots($annots, $len) {
         for($i = 0, $c = count($annots); $i < $c; $i++) {
             $annots[$i]['cplen'] += $len;

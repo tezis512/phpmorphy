@@ -20,7 +20,8 @@
 * Boston, MA 02111-1307, USA.
 */
 
-class phpMorphy_Finder_Fsa_PredictByDatabase extends phpMorphy_Finder_Fsa_Finder {
+class phpMorphy_Finder_Fsa_PredictByDatabase extends phpMorphy_Finder_Fsa_Finder
+{
     protected
         $collector,
         $unicode,
@@ -43,7 +44,11 @@ class phpMorphy_Finder_Fsa_PredictByDatabase extends phpMorphy_Finder_Fsa_Finder
 
         $this->unicode = phpMorphy_UnicodeHelper_UnicodeHelperAbstract::getHelperForEncoding($encoding);
     }
-    
+
+    /**
+     * @param string $word
+     * @return array|false
+     */
     protected function doFindWord($word) {
         $rev_word = $this->unicode->strrev($word);
 

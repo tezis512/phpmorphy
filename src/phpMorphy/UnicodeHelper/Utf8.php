@@ -20,7 +20,8 @@
 * Boston, MA 02111-1307, USA.
 */
 
-class phpMorphy_UnicodeHelper_Utf8 extends phpMorphy_UnicodeHelper_UnicodeHelperAbstract {
+class phpMorphy_UnicodeHelper_Utf8 extends phpMorphy_UnicodeHelper_UnicodeHelperAbstract
+{
     protected static $TAILS_LENGTH_MAP = array(
         0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
         0,0,0,0,0,0,0,0, 0,0,0,0,0,0,0,0,
@@ -40,10 +41,18 @@ class phpMorphy_UnicodeHelper_Utf8 extends phpMorphy_UnicodeHelper_UnicodeHelper
         3,3,3,3,3,3,3,3, 4,4,4,4,5,5,0,0
     );
 
+    /**
+     * @param string $str
+     * @return int
+     */
     function getFirstCharSize($str) {
         return 1 + self::$TAILS_LENGTH_MAP[ord($str[0])];
     }
 
+    /**
+     * @param string $str
+     * @return string
+     */
     function strrev($str) {
         preg_match_all('/./us', $str, $matches);
         return implode('', array_reverse($matches[0]));
@@ -62,6 +71,10 @@ class phpMorphy_UnicodeHelper_Utf8 extends phpMorphy_UnicodeHelper_UnicodeHelper
         */
     }
 
+    /**
+     * @param string $str
+     * @return mixed|string
+     */
     function clearIncompleteCharsAtEnd($str) {
         $strlen = $GLOBALS['__phpmorphy_strlen']($str);
 
@@ -95,6 +108,10 @@ class phpMorphy_UnicodeHelper_Utf8 extends phpMorphy_UnicodeHelper_UnicodeHelper
         return '';
     }
 
+    /**
+     * @param string $str
+     * @return int
+     */
     protected function strlenImpl($str) {
         preg_match_all('/./us', $str, $matches);
         return count($matches[0]);

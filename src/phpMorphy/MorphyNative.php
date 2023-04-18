@@ -57,9 +57,9 @@ class phpMorphy_MorphyNative implements phpMorphy_MorphyInterface {
 
         $this->last_prediction_type = self::PREDICT_BY_NONE;
 
-//        $this->init('__predict_by_db_morphier');
-//        $this->init('__predict_by_suf_morphier');
-//        $this->init('__bulk_morphier');
+        $this->init('__predict_by_db_morphier');
+        $this->init('__predict_by_suf_morphier');
+        $this->init('__bulk_morphier');
         $this->init('__common_morphier');
 //        $this->init('__paradigm_serializer');
 //        $this->init('__grammems_provider');
@@ -665,9 +665,9 @@ class phpMorphy_MorphyNative implements phpMorphy_MorphyInterface {
                 );
 
                 break;
-            case '__paradigm_serializer':
-                $this->__paradigm_serializer = $this->createParadigmSerializer();
-                break;
+//            case '__paradigm_serializer':
+//                $this->__paradigm_serializer = $this->createParadigmSerializer();
+//                break;
             case '__grammems_provider':
                 $this->__grammems_provider = $this->createGrammemsProvider();
                 break;

@@ -22,7 +22,8 @@
 
 
 
-class phpMorphy_Finder_Fsa_Finder extends phpMorphy_Finder_FinderAbstract {
+class phpMorphy_Finder_Fsa_Finder extends phpMorphy_Finder_FinderAbstract
+{
     protected
         $fsa,
         $root;
@@ -34,6 +35,9 @@ class phpMorphy_Finder_Fsa_Finder extends phpMorphy_Finder_FinderAbstract {
         $this->root = $this->fsa->getRootTrans();
     }
 
+    /**
+     * @return phpMorphy_Fsa_FsaInterface
+     */
     function getFsa() {
         return $this->fsa;
     }
